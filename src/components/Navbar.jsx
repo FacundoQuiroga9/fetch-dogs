@@ -19,7 +19,7 @@ const Navbar = () => {
       {isAuthenticated && (
         <>
         <div className="nav-menu">
-          <Link to="/search" className="nav-link">Search</Link>
+          <Link to="/search" className="nav-link">Find your dog</Link>
           <Link to="/favorites" className="nav-link">My Favorites</Link>
         </div>
           <button className="fetch-btn" onClick={handleLogout}>

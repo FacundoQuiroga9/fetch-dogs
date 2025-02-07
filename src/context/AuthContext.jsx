@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [favorites, setFavorites] = useState([]); // Lista global de favoritos
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -51,11 +52,25 @@ export const AuthProvider = ({ children }) => {
       credentials: "include",
     });
     setIsAuthenticated(false);
+    setFavorites([]); // Limpiar favoritos al cerrar sesión
     navigate("/");
   };
 
+  // Función para añadir o quitar favoritos
+  const toggleFavorite = (dog) => {
+    setFavorites((prevFavorites) => {
+      const isAlreadyFavorite = prevFavorites.some((fav) => fav.id === dog.id);
+
+      if (isAlreadyFavorite) {
+        return prevFavorites.filter((fav) => fav.id !== dog.id);
+      } else {
+        return [...prevFavorites, dog];
+      }
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, favorites, toggleFavorite }}>
       {children}
     </AuthContext.Provider>
   );
