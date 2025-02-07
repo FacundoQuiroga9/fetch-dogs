@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../assets/logo.png";
 
@@ -9,17 +9,24 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(navigate); 
+    logout(navigate);
   };
 
   return (
     <div className="navbar container">
       <img src={logo} alt="fetch logo" className="fetch-logo" />
+
       {isAuthenticated && (
-        <button className="fetch-btn" onClick={handleLogout}>
-          Logout
-        </button>
-      )}
+        <>
+        <div className="nav-menu">
+          <Link to="/search" className="nav-link">Search</Link>
+          <Link to="/favorites" className="nav-link">My Favorites</Link>
+        </div>
+          <button className="fetch-btn" onClick={handleLogout}>
+            Logout
+          </button>
+          </>
+)}
     </div>
   );
 };

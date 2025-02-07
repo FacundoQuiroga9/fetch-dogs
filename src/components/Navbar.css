@@ -7,6 +7,14 @@
   width: 4rem;
 }
 
+.nav-menu{
+  display: flex;
+}
+
+.nav-link{
+  margin: 0 1rem;
+}
+
 @media (min-width: 48rem) {
   .fetch-logo{
     width: 5rem;
