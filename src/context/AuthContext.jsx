@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.error("Error al verificar la autenticación:", error);
+        console.error("Authentication verification error", error);
         setIsAuthenticated(false);
       }
     };
@@ -38,10 +38,10 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         navigate("/search");
       } else {
-        alert("Error en la autenticación");
+        alert("Authentication error");
       }
     } catch (error) {
-      console.error("Error en la solicitud de autenticación:", error);
+      console.error("Authentication request error", error);
     }
   };
 

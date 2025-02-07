@@ -1,0 +1,25 @@
+.navbar{
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.209)
+}
+
+.fetch-logo{
+  width: 4rem;
+}
+
+/* Tablets (min-width: 48rem) -> equivalente a 768px */
+@media (min-width: 48rem) {
+  .fetch-logo{
+    width: 5rem;
+  }
+
+}
+
+/* Laptops pequeñas y pantallas grandes (min-width: 64rem) -> equivalente a 1024px */
+@media (min-width: 64rem) {
+
+  .fetch-logo{
+    width: 6rem;
+  }
+
+}
