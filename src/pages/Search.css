@@ -1,0 +1,49 @@
+h2{
+  color: #FFA900;
+  font-size: 3rem;
+  font-family: "Chela One", serif;
+}
+
+.filters-row{
+  display: flex;
+  justify-content: center;
+  margin: auto 0;
+  align-items: end;
+}
+
+.fetch-btn{
+  background-color: #FFA900;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+  color: #300D38;
+  max-width: 10rem;
+  align-self: flex-end;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Tablets (min-width: 48rem) -> equivalente a 768px */
+@media (min-width: 48rem) {
+}
+
+/* Laptops pequeñas y pantallas grandes (min-width: 64rem) -> equivalente a 1024px */
+@media (min-width: 64rem) {
+  h2{
+    font-size: 5rem;
+  }
+
+  .filters-row{
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+  }
+
+  .fetch-btn{
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    max-width: 10rem;
+    align-self: flex-end;
+    font-weight: bold;
+  }
+
+}

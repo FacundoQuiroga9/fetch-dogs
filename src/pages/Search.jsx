@@ -1,6 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import DogCard from "../components/DogCard";
+
+import "./Search.css";
 
 const Search = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -10,7 +13,7 @@ const Search = () => {
   const [zipCode, setZipCode] = useState("");
   const [ageMin, setAgeMin] = useState("");
   const [ageMax, setAgeMax] = useState("");
-  const [sortBy, setSortBy] = useState("breed:asc"); // Default: Ordenar por raza ascendente
+  const [sortBy, setSortBy] = useState("breed:asc");
   const [dogs, setDogs] = useState([]);
   const [totalDogs, setTotalDogs] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +25,6 @@ const Search = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  // Obtener lista de razas disponibles
   useEffect(() => {
     fetch("https://frontend-take-home-service.fetch.com/dogs/breeds", {
       credentials: "include",
@@ -32,16 +34,14 @@ const Search = () => {
       .catch((error) => console.error("Error obteniendo razas:", error));
   }, []);
 
-  // Fetch automático de todos los perros al cargar la página
   useEffect(() => {
-    fetchDogs(1, "", "", "", "", "breed:asc"); // Sin filtros al inicio
+    fetchDogs(1, "", "", "", "", "breed:asc");
   }, []);
 
   const fetchDogs = async (page, breedFilter, zipCodeFilter, ageMinFilter, ageMaxFilter, sortFilter) => {
     const offset = (page - 1) * pageSize;
     let apiUrl = `https://frontend-take-home-service.fetch.com/dogs/search?size=${pageSize}&from=${offset}&sort=${sortFilter}`;
 
-    // Agregar filtros dinámicamente
     if (breedFilter) apiUrl += `&breeds=${breedFilter}`;
     if (zipCodeFilter) apiUrl += `&zipCodes=${zipCodeFilter}`;
     if (ageMinFilter) apiUrl += `&ageMin=${ageMinFilter}`;
@@ -96,98 +96,85 @@ const Search = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">Buscar Perros</h2>
+      <h2 className="text-center mb-4">Search Dogs</h2>
 
       {/* Filtros */}
-      <div className="mb-3">
-        <label className="form-label">Selecciona una Raza:</label>
-        <select className="form-select" value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
-          <option value="">Todas las Razas</option>
-          {breeds.map((breed) => (
-            <option key={breed} value={breed}>
-              {breed}
-            </option>
-          ))}
-        </select>
-
-        <label className="form-label mt-3">Código Postal:</label>
-        <input
-          type="text"
-          className="form-control"
-          value={zipCode}
-          onChange={(e) => setZipCode(e.target.value)}
-          placeholder="Ejemplo: 10001"
-        />
-
-        <label className="form-label mt-3">Edad mínima:</label>
-        <input
-          type="number"
-          className="form-control"
-          value={ageMin}
-          onChange={(e) => setAgeMin(e.target.value)}
-          placeholder="Edad mínima"
-        />
-
-        <label className="form-label mt-3">Edad máxima:</label>
-        <input
-          type="number"
-          className="form-control"
-          value={ageMax}
-          onChange={(e) => setAgeMax(e.target.value)}
-          placeholder="Edad máxima"
-        />
-
-        <label className="form-label mt-3">Ordenar por:</label>
-        <select className="form-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="breed:asc">Raza (A-Z)</option>
-          <option value="breed:desc">Raza (Z-A)</option>
-          <option value="name:asc">Nombre (A-Z)</option>
-          <option value="name:desc">Nombre (Z-A)</option>
-          <option value="age:asc">Edad (Menor a Mayor)</option>
-          <option value="age:desc">Edad (Mayor a Menor)</option>
-        </select>
-
-        <button className="btn btn-primary mt-3" onClick={handleSearch}>
-          Buscar
-        </button>
+      <div className="row mb-3 filters-row">
+        <div className="col">
+          <label className="form-label">Select breed:</label>
+          <select className="form-select" value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
+            <option value="">All breeds</option>
+            {breeds.map((breed) => (
+              <option key={breed} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col">
+          <label className="form-label">Zip code:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+            placeholder="Example: 10001"
+          />
+        </div>
+        <div className="col">
+          <label className="form-label">Min age:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={ageMin}
+            onChange={(e) => setAgeMin(e.target.value)}
+            placeholder="Minimum age"
+          />
+        </div>
+        <div className="col">
+          <label className="form-label">Max age:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={ageMax}
+            onChange={(e) => setAgeMax(e.target.value)}
+            placeholder="Maximum age"
+          />
+        </div>
+        <div className="col">
+          <label className="form-label">Sort by:</label>
+          <select className="form-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <option value="breed:asc">Breed (A-Z)</option>
+            <option value="breed:desc">Breed (Z-A)</option>
+            <option value="name:asc">Name (A-Z)</option>
+            <option value="name:desc">Name (Z-A)</option>
+            <option value="age:asc">Age (Low to high)</option>
+            <option value="age:desc">Age (High to low)</option>
+          </select>
+        </div>
+          <button className="fetch-btn" onClick={handleSearch}>
+            Search
+          </button>
       </div>
 
-      {/* Resultados */}
+      {/* Renderizado de Perros */}
       <div className="row">
         {dogs.length > 0 ? (
-          dogs.map((dog) => (
-            <div key={dog.id} className="col-md-4 mb-4">
-              <div className="card h-100 d-flex flex-column">
-                <img
-                  src={dog.img}
-                  className="card-img-top"
-                  alt={dog.name}
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
-                <div className="card-body d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="card-title">{dog.name}</h5>
-                    <p className="card-text"><strong>Edad:</strong> {dog.age} años</p>
-                    <p className="card-text"><strong>Raza:</strong> {dog.breed}</p>
-                    <p className="card-text"><strong>Código Postal:</strong> {dog.zip_code}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
+          dogs.map((dog) => <DogCard key={dog.id} dog={dog} />)
         ) : (
-          <p className="text-center">No se encontraron resultados</p>
+          <p className="text-center">No results found</p>
         )}
       </div>
 
+
       {/* Paginación */}
-      <div className="d-flex justify-content-between mt-4">
-        <button className="btn btn-secondary" onClick={handlePrevPage} disabled={currentPage === 1}>
-          Anterior
+      <div className="d-flex justify-content-between mt-1 mb-5">
+        <button className="fetch-btn" onClick={handlePrevPage} disabled={currentPage === 1}>
+          Previous
         </button>
-        <span className="align-self-center">Página {currentPage}</span>
-        <button className="btn btn-secondary" onClick={handleNextPage} disabled={currentPage * pageSize >= totalDogs}>
-          Siguiente
+        <span className="align-self-center">Page {currentPage}</span>
+        <button className="fetch-btn" onClick={handleNextPage} disabled={currentPage * pageSize >= totalDogs}>
+          Next
         </button>
       </div>
     </div>

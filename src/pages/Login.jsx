@@ -15,11 +15,11 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Iniciar Sesión</h2>
+      <h2>Log in</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} required />
-        <input type="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <button type="submit">Ingresar</button>
+        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <button type="submit">Sign in</button>
       </form>
     </div>
   );
