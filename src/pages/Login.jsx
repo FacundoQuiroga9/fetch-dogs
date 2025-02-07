@@ -5,13 +5,13 @@ import "./Login.css"
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // ✅ Se usa aquí, dentro de un componente dentro de <Router>
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(name, email, navigate); // ✅ Se pasa `navigate` como argumento
+    await login(name, email, navigate);
   };
 
   return (

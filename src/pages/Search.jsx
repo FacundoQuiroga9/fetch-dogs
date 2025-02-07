@@ -17,7 +17,7 @@ const Search = () => {
   const [dogs, setDogs] = useState([]);
   const [totalDogs, setTotalDogs] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 12;
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -71,7 +71,7 @@ const Search = () => {
         }
       }
     } catch (error) {
-      console.error("Error en la búsqueda de perros:", error);
+      console.error("Error retrieving breeds:", error);
     }
   };
 
@@ -98,7 +98,6 @@ const Search = () => {
     <div className="container mt-5">
       <h2 className="text-center mb-4">Search Dogs</h2>
 
-      {/* Filtros */}
       <div className="row mb-3 filters-row">
         <div className="col">
           <label className="form-label">Select breed:</label>
@@ -157,7 +156,6 @@ const Search = () => {
           </button>
       </div>
 
-      {/* Renderizado de Perros */}
       <div className="row">
         {dogs.length > 0 ? (
           dogs.map((dog) => <DogCard key={dog.id} dog={dog} />)
@@ -167,7 +165,6 @@ const Search = () => {
       </div>
 
 
-      {/* Paginación */}
       <div className="d-flex justify-content-between mt-1 mb-5">
         <button className="fetch-btn" onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous

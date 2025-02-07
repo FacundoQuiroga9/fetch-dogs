@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated === null) {
-    return <div>Cargando...</div>; // O un componente de carga
+    return <div>Loading...</div>;
   }
 
   return isAuthenticated ? children : <Navigate to="/" />;

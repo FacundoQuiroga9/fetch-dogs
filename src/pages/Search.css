@@ -23,11 +23,9 @@ h2{
   margin-top: 1rem;
 }
 
-/* Tablets (min-width: 48rem) -> equivalente a 768px */
 @media (min-width: 48rem) {
 }
 
-/* Laptops pequeñas y pantallas grandes (min-width: 64rem) -> equivalente a 1024px */
 @media (min-width: 64rem) {
   h2{
     font-size: 5rem;
