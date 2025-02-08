@@ -3,9 +3,15 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [favorites, setFavorites] = useState([]);
-  const [matchedDog, setMatchedDog] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    JSON.parse(localStorage.getItem("isAuthenticated")) || null
+  );
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
+  const [matchedDog, setMatchedDog] = useState(
+    JSON.parse(localStorage.getItem("matchedDog")) || null
+  );
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -15,17 +21,32 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.ok) {
           setIsAuthenticated(true);
+          localStorage.setItem("isAuthenticated", JSON.stringify(true));
         } else {
           setIsAuthenticated(false);
+          localStorage.removeItem("isAuthenticated");
         }
       } catch (error) {
         console.error("Authentication verification error", error);
         setIsAuthenticated(false);
+        localStorage.removeItem("isAuthenticated");
       }
     };
 
-    checkAuth();
-  }, []);
+    if (isAuthenticated === null) {
+      checkAuth();
+    }
+  }, [isAuthenticated]);
+
+  // Almacenar favoritos en localStorage cuando cambian
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // Almacenar el matched dog en localStorage cuando cambia
+  useEffect(() => {
+    localStorage.setItem("matchedDog", JSON.stringify(matchedDog));
+  }, [matchedDog]);
 
   const login = async (name, email, navigate) => {
     try {
@@ -38,6 +59,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         setIsAuthenticated(true);
+        localStorage.setItem("isAuthenticated", JSON.stringify(true));
         navigate("/search");
       } else {
         alert("Authentication error");
@@ -55,10 +77,16 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setFavorites([]);
     setMatchedDog(null);
+
+    // Eliminar datos almacenados en localStorage
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("favorites");
+    localStorage.removeItem("matchedDog");
+
     navigate("/");
   };
 
-  // Función para añadir o quitar favoritos
+  // Función para añadir o quitar favoritos con persistencia
   const toggleFavorite = (dog) => {
     setFavorites((prevFavorites) => {
       const isAlreadyFavorite = prevFavorites.some((fav) => fav.id === dog.id);
@@ -66,9 +94,9 @@ export const AuthProvider = ({ children }) => {
 
       if (isAlreadyFavorite) {
         updatedFavorites = prevFavorites.filter((fav) => fav.id !== dog.id);
-        // Si el perro eliminado es el match, limpiamos el matched dog
         if (matchedDog?.id === dog.id) {
           setMatchedDog(null);
+          localStorage.removeItem("matchedDog");
         }
       } else {
         updatedFavorites = [...prevFavorites, dog];

@@ -1,8 +1,39 @@
-# React + Vite
+# 🐶 Fetch - Dog Adoption Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is part of Fetch's technical take-home exercise. It is a web application that allows users to search for available shelter dogs, filter them by breed, mark favorites, and generate a match from their favorite dogs.
 
-Currently, two official plugins are available:
+## 🚀 **Live Demo**
+🔗 [Deployed Application](#)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## 📌 **Features**
+✔️ **Authentication** with email and password.
+✔️ **Dog search** with breed filtering and pagination.
+✔️ **Sorting results** by name, age, and breed.
+✔️ **Favorite selection** with persistence in `localStorage`.
+✔️ **Generate a match** using the `/dogs/match` endpoint.
+✔️ **Attractive UI** with animations and an interactive modal.
+
+---
+
+## 🛠 **Technologies Used**
+- **React** with Vite ⚡
+- **React Router DOM** for navigation 🛤️
+- **Bootstrap** for styling and responsive design 🎨
+- **Fetch API** for API requests 🔗
+- **LocalStorage** for session and favorites persistence 🗄️
+
+---
+
+## 📂 **Project Structure**
+📦 fetch-dogs ┣ 📂 public ┣ 📂 src ┃ ┣ 📂 components ┃ ┃ ┣ 📜 DogCard.jsx ┃ ┃ ┣ 📜 Navbar.jsx ┃ ┃ ┣ 📜 MatchModal.jsx ┃ ┃ ┗ 📜 ... ┃ ┣ 📂 context ┃ ┃ ┗ 📜 AuthContext.jsx ┃ ┣ 📂 pages ┃ ┃ ┣ 📜 Login.jsx ┃ ┃ ┣ 📜 Search.jsx ┃ ┃ ┗ 📜 Favorites.jsx ┃ ┣ 📜 App.jsx ┃ ┣ 📜 main.jsx ┃ ┗ 📂 assets ┣ 📜 package.json ┣ 📜 vite.config.js ┣ 📜 README.md ┗ 📜 .gitignore
+
+
+---
+
+## 🏗 **Installation and Setup**
+### 1️⃣ Clone the repository
+```sh
+git clone https://github.com/FacundoQuiroga9/fetch-dogs.git
+cd fetch-dogs
