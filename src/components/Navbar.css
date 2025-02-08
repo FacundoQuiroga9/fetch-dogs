@@ -7,9 +7,25 @@
   width: 4rem;
 }
 
+.nav-menu{
+  display: flex;
+}
+
+.nav-link{
+  margin: 0 1rem;
+  font-family: "Bowlby One SC", serif;
+  font-size: .4rem;
+}
+
 @media (min-width: 48rem) {
   .fetch-logo{
     width: 5rem;
+  }
+
+  .nav-link{
+    margin: 0 1rem;
+    font-family: "Bowlby One SC", serif;
+    font-size: 1rem;
   }
 
 }

@@ -94,6 +94,17 @@ const Search = () => {
     }
   };
 
+  const [favorites, setFavorites] = useState([]);
+
+  const toggleFavorite = (dog) => {
+    if (favorites.some((fav) => fav.id === dog.id)) {
+      setFavorites(favorites.filter((fav) => fav.id !== dog.id)); // Quitar de favoritos
+    } else {
+      setFavorites([...favorites, dog]); // Agregar a favoritos
+    }
+  };
+
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Search Dogs</h2>
@@ -158,7 +169,7 @@ const Search = () => {
 
       <div className="row">
         {dogs.length > 0 ? (
-          dogs.map((dog) => <DogCard key={dog.id} dog={dog} />)
+          dogs.map((dog) => <DogCard key={dog.id} dog={dog} toggleFavorite={toggleFavorite} isFavorite={favorites.some((fav) => fav.id === dog.id)} />)
         ) : (
           <p className="text-center">No results found</p>
         )}

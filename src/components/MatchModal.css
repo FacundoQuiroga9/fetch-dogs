@@ -1,0 +1,54 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #FFA900;
+  padding: 20px;
+  border-radius: 10px;
+  width: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.spinning,
+.match-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.spinning h2,
+.match-result h2 {
+  font-size: 22px;
+  max-width: 90%;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.spinning-img,
+.match-img {
+  width: 300px; /* ✅ Tamaño fijo para evitar que el modal cambie de tamaño */
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.fetch-btn.close{
+  align-self: center;
+}
