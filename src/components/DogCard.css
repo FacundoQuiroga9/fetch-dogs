@@ -60,20 +60,37 @@
 .favorite-btn {
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
   position: absolute;
   top: 15px;
   right: 15px;
-  color: white;
+  transition: transform 0.2s ease-in-out;
 }
 
 .favorite-btn:hover {
   transform: scale(1.2);
 }
 
-/* Si es favorito, el color cambia */
-.favorite {
-  color: red;
+.heart-icon {
+  width: 30px;  /* Ajusta el tamaño del icono */
+  height: 30px;
+}
+
+
+/* Badge de matched dog */
+.matched-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #300D38;
+  color: white;
+  width: 45px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.matched-badge img{
+  width: 100%;
 }

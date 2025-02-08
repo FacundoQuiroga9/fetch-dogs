@@ -4,7 +4,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [favorites, setFavorites] = useState([]); // Lista global de favoritos
+  const [favorites, setFavorites] = useState([]);
+  const [matchedDog, setMatchedDog] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -52,7 +53,8 @@ export const AuthProvider = ({ children }) => {
       credentials: "include",
     });
     setIsAuthenticated(false);
-    setFavorites([]); // Limpiar favoritos al cerrar sesión
+    setFavorites([]);
+    setMatchedDog(null);
     navigate("/");
   };
 
@@ -60,17 +62,24 @@ export const AuthProvider = ({ children }) => {
   const toggleFavorite = (dog) => {
     setFavorites((prevFavorites) => {
       const isAlreadyFavorite = prevFavorites.some((fav) => fav.id === dog.id);
+      let updatedFavorites;
 
       if (isAlreadyFavorite) {
-        return prevFavorites.filter((fav) => fav.id !== dog.id);
+        updatedFavorites = prevFavorites.filter((fav) => fav.id !== dog.id);
+        // Si el perro eliminado es el match, limpiamos el matched dog
+        if (matchedDog?.id === dog.id) {
+          setMatchedDog(null);
+        }
       } else {
-        return [...prevFavorites, dog];
+        updatedFavorites = [...prevFavorites, dog];
       }
+
+      return updatedFavorites;
     });
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, favorites, toggleFavorite }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, favorites, toggleFavorite, matchedDog, setMatchedDog }}>
       {children}
     </AuthContext.Provider>
   );

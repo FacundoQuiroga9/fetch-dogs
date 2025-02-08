@@ -1,16 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "./DogCard.css";
+import heart from "../assets/heart.png";
+import heartFilled from "../assets/heart-filled.png";
+import star from "../assets/star.png"
 
-const DogCard = ({ dog }) => {
+const DogCard = ({ dog, isMatched }) => {
   const { favorites, toggleFavorite } = useContext(AuthContext);
 
-  // Verificar si el perro ya está en la lista de favoritos
   const isFavorite = favorites.some((fav) => fav.id === dog.id);
 
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="dog-card">
+        {/* Agregar la estrella si el perro es el match */}
+        {isMatched && <div className="matched-badge"><img src={star} alt="" /></div>}
+
         <img src={dog.img} alt={dog.name} className="dog-img" />
 
         <div className="dog-name">{dog.name}</div>
@@ -20,12 +25,9 @@ const DogCard = ({ dog }) => {
           <p><strong>Age:</strong> {dog.age} years</p>
           <p><strong>Zipcode:</strong> {dog.zip_code}</p>
 
-          {/* Botón de favorito */}
-          <button
-            className={`favorite-btn ${isFavorite ? "favorite" : ""}`}
-            onClick={() => toggleFavorite(dog)}
-          >
-            {isFavorite ? "❤️" : "🤍"}
+          {/* Botón de favorito con imagen en lugar de emoji */}
+          <button className="favorite-btn" onClick={() => toggleFavorite(dog)}>
+            <img src={isFavorite ? heartFilled : heart} alt="favorite" className="heart-icon" />
           </button>
         </div>
       </div>
