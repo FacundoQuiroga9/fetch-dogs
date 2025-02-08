@@ -13,7 +13,7 @@ const DogCard = ({ dog, isMatched }) => {
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="dog-card">
-        {/* Agregar la estrella si el perro es el match */}
+
         {isMatched && <div className="matched-badge"><img src={star} alt="" /></div>}
 
         <img src={dog.img} alt={dog.name} className="dog-img" />
@@ -25,7 +25,6 @@ const DogCard = ({ dog, isMatched }) => {
           <p><strong>Age:</strong> {dog.age} years</p>
           <p><strong>Zipcode:</strong> {dog.zip_code}</p>
 
-          {/* Botón de favorito con imagen en lugar de emoji */}
           <button className="favorite-btn" onClick={() => toggleFavorite(dog)}>
             <img src={isFavorite ? heartFilled : heart} alt="favorite" className="heart-icon" />
           </button>

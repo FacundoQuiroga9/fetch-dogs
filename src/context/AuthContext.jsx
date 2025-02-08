@@ -38,12 +38,10 @@ export const AuthProvider = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  // Almacenar favoritos en localStorage cuando cambian
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  // Almacenar el matched dog en localStorage cuando cambia
   useEffect(() => {
     localStorage.setItem("matchedDog", JSON.stringify(matchedDog));
   }, [matchedDog]);
@@ -78,7 +76,6 @@ export const AuthProvider = ({ children }) => {
     setFavorites([]);
     setMatchedDog(null);
 
-    // Eliminar datos almacenados en localStorage
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("favorites");
     localStorage.removeItem("matchedDog");
@@ -86,7 +83,6 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  // Función para añadir o quitar favoritos con persistencia
   const toggleFavorite = (dog) => {
     setFavorites((prevFavorites) => {
       const isAlreadyFavorite = prevFavorites.some((fav) => fav.id === dog.id);

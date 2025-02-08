@@ -43,7 +43,7 @@
 
 .spinning-img,
 .match-img {
-  width: 300px; /* ✅ Tamaño fijo para evitar que el modal cambie de tamaño */
+  width: 300px; 
   height: 300px;
   object-fit: cover;
   border-radius: 10px;

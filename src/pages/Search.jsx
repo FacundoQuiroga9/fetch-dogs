@@ -98,9 +98,9 @@ const Search = () => {
 
   const toggleFavorite = (dog) => {
     if (favorites.some((fav) => fav.id === dog.id)) {
-      setFavorites(favorites.filter((fav) => fav.id !== dog.id)); // Quitar de favoritos
+      setFavorites(favorites.filter((fav) => fav.id !== dog.id));
     } else {
-      setFavorites([...favorites, dog]); // Agregar a favoritos
+      setFavorites([...favorites, dog]); 
     }
   };
 

@@ -8,7 +8,6 @@ const Favorites = () => {
   const { favorites, matchedDog, setMatchedDog } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
-  // Ordenar la lista para que el matched dog siempre aparezca primero si existe
   const sortedFavorites = matchedDog
     ? [matchedDog, ...favorites.filter((dog) => dog.id !== matchedDog.id)]
     : favorites;

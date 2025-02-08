@@ -72,12 +72,11 @@
 }
 
 .heart-icon {
-  width: 30px;  /* Ajusta el tamaño del icono */
+  width: 30px;  
   height: 30px;
 }
 
 
-/* Badge de matched dog */
 .matched-badge {
   position: absolute;
   top: 10px;

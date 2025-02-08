@@ -1,4 +1,4 @@
-# 🐶 Fetch - Dog Adoption Finder
+# 🐶 Fetch - Dog Finder
 
 This project is part of Fetch's technical take-home exercise. It is a web application that allows users to search for available shelter dogs, filter them by breed, mark favorites, and generate a match from their favorite dogs.
 
